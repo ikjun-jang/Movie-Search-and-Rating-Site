@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ApplicationInsightsResourceId>/subscriptions/627af59e-3bbe-4c7d-9202-e4eb7d717947/resourceGroups/MoviesAPI/providers/microsoft.insights/components/MoviesAPI</ApplicationInsightsResourceId>
+    <UserSecretsId>dd176c3f-144b-417b-8b6a-25c98098277a</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.11.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="6.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+</Project>
