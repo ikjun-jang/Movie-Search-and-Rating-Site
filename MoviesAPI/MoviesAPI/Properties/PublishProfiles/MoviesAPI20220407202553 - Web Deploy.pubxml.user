@@ -7,7 +7,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAhK192McpjUWns803NWlMaAAAAAACAAAAAAAQZgAAAAEAACAAAAAhji8VqIa2END36AfyhJrHQZEJBZQW8arL6My+9WKelQAAAAAOgAAAAAIAACAAAAB+eCy2mF+IBbEBpdnLBuklYes5y5NySsX18F94E+ACHoAAAADuqGOO7w4AsmZGMvVr23UqwGYBOCf3TzBmu0ySn1fGfo+08QTqjJ0VN0U0Jd9vL9hueT6lQuIcE8xlmUt8TfdhHmdmCBfzEqCty1Q2ISSxPkNF9wCht7QGUc1IklFyXfCTZbxSUaxEMV7d1kV9vOrm77ZrWVKzyOLIxaZb7ZJaLUAAAACnqMrIzBeHdBEkcfRqrXzZEH6K+BdEbmO2otlj+MHNpbVSBa3uT9/uq0E3PU8YmYIW9lxDsjBnatXew5WFR2w6</EncryptedPassword>
-    <History>True|2022-04-08T10:39:06.0390912Z;True|2022-04-08T16:06:29.5167912+09:00;True|2022-04-08T15:36:52.3070177+09:00;False|2022-04-08T15:10:47.7943535+09:00;</History>
+    <History>True|2022-04-08T18:38:49.5030714Z;True|2022-04-08T19:39:06.0390912+09:00;True|2022-04-08T16:06:29.5167912+09:00;True|2022-04-08T15:36:52.3070177+09:00;False|2022-04-08T15:10:47.7943535+09:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <EFMigrations Include="MoviesAPI.ApplicationDbContext">

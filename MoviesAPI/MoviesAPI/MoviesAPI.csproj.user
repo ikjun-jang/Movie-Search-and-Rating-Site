@@ -5,6 +5,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <ActiveDebugProfile>MoviesAPI</ActiveDebugProfile>
-    <NameOfLastUsedPublishProfile>C:\Users\User\React17-and-ASP.NET-Core\React-and-ASP.NET-Core\React 17 and ASP.NET Core 6\Module 1 - Introduction\MoviesAPI\MoviesAPI\Properties\PublishProfiles\MoviesAPI20220407202553 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\User\React17-and-ASP.NET-Core\Movie-Search-and-Review-Site\MoviesAPI\MoviesAPI\Properties\PublishProfiles\MoviesAPI20220407202553 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
