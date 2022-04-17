@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -102,6 +103,11 @@ namespace MoviesAPI.Controllers
             dto.AverageVote = averageVote;
             dto.UserVote = userVote;
             dto.Actors = dto.Actors.OrderBy(x => x.Order).ToList();
+            
+            var reviews = await context.Reviews
+                    .Where(x => x.MovieId == id)
+                    .ToListAsync();
+            dto.Reviews = mapper.Map<List<ReviewDTO>>(reviews);
             return dto;
         }
 

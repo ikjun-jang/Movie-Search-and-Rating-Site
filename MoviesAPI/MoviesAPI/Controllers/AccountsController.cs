@@ -129,5 +129,15 @@ namespace MoviesAPI.Controllers
                 Expiration = expiration
             };
         }
+
+        [HttpDelete("delete/{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "IsAdmin")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            // Issue: Dependency on Rating - userId FK
+            await userManager.DeleteAsync(user);
+            return NoContent();
+        }
     }
 }

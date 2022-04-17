@@ -1,27 +1,37 @@
 import axios, { AxiosResponse } from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { urlMovies, urlRatings } from "../endpoints";
+import AuthenticationContext from "../auth/AuthenticationContext";
+import { urlMovies, urlRatings, urlReviews } from "../endpoints";
+import Button from "../utils/Button";
 import coordinateDTO from "../utils/coordinates.models";
+import DisplayErrors from "../utils/DisplayErrors";
 import Loading from "../utils/Loading";
 import Map from "../utils/Map";
 import Ratings from "../utils/Ratings";
+import css from "./MovieDetails.module.css";
 import { movieDTO } from "./movies.model";
 
 export default function MovieDetails() {
   const { id }: any = useParams();
   const [movie, SetMovie] = useState<movieDTO>();
+  const [reviewText, setReviewText] = useState<string>("");
+  const [errors, setErrors] = useState<string[]>([]);
+  const { claims } = useContext(AuthenticationContext);
 
   useEffect(() => {
     axios
       .get(`${urlMovies}/${id}`)
       .then((response: AxiosResponse<movieDTO>) => {
         response.data.releaseDate = new Date(response.data.releaseDate);
+        response.data.reviews?.forEach((review) => {
+          review.postingDate = new Date(review.postingDate);
+        });
         SetMovie(response.data);
       });
-  }, [id]);
+  }, [id, movie]);
 
   function transformCoordinates(): coordinateDTO[] {
     if (movie?.movieTheaters) {
@@ -57,8 +67,28 @@ export default function MovieDetails() {
     });
   }
 
+  function postReview() {
+    const userIsLoggedIn = claims.length > 0;
+    if (!userIsLoggedIn) {
+      Swal.fire({ title: "Error", text: "You need to login", icon: "error" });
+      return;
+    }
+    try {
+      axios
+        .post(urlReviews, { reviewText: reviewText, movieId: id })
+        .then(() => {
+          Swal.fire({ icon: "success", title: "Review posted" });
+        });
+      setReviewText("");
+    } catch (errors) {
+      if (errors && errors.response) {
+        setErrors(errors.response.data);
+      }
+    }
+  }
+
   return movie ? (
-    <div>
+    <div style={{ marginTop: "1rem" }}>
       <h2>
         {movie.title} ({movie.releaseDate.getFullYear()})
       </h2>
@@ -142,6 +172,33 @@ export default function MovieDetails() {
         <div>
           <h2>Showing on</h2>
           <Map coordinates={transformCoordinates()} readOnly={true} />
+        </div>
+      ) : null}
+      <div style={{ marginTop: "2rem" }}>
+        <h3>My Review</h3>
+        <DisplayErrors errors={errors} />
+        <textarea
+          id="reviewTextArea"
+          name="reviewTextArea"
+          rows={5}
+          cols={170}
+          value={reviewText}
+          onChange={(event) => setReviewText(event.target.value)}
+        />
+        <div className={css.button}>
+          <Button onClick={() => postReview()}>Post</Button>
+        </div>
+      </div>
+      {movie.reviews?.length !== 0 ? (
+        <div>
+          <h3>Reviews</h3>
+          {movie.reviews?.map((review) => (
+            <div key={review.id} className={css.p}>
+              {review.userEmail} | {review.postingDate.toDateString()}
+              <hr />
+              <ReactMarkdown>{review.reviewText}</ReactMarkdown>
+            </div>
+          ))}
         </div>
       ) : null}
     </div>

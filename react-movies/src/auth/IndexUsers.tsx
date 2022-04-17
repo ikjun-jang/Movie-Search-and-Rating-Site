@@ -8,28 +8,36 @@ import { userDTO } from "./auth.models";
 
 export default function IndexUsers() {
   async function makeAdmin(id: string) {
-      await doAdmin(`${urlAccounts}/makeAdmin`, id);
+    await doAdmin(`${urlAccounts}/makeAdmin`, id);
   }
 
   async function removeAdmin(id: string) {
     await doAdmin(`${urlAccounts}/removeAdmin`, id);
   }
 
-  async function doAdmin(url: string, id: string){
-      await axios.post(url, JSON.stringify(id), {
-          headers: {'Content-Type': 'application/json'}
-      });
+  async function doAdmin(url: string, id: string) {
+    await axios.post(url, JSON.stringify(id), {
+      headers: { "Content-Type": "application/json" },
+    });
+    swalFire();
+  }
 
-      Swal.fire({
-        title: 'Success',
-        text: 'Operation finished correctly',
-        icon: 'success'
-      });
+  // function deleteUser(id: string) {
+  //   axios.delete(`${urlAccounts}/delete/${id}`);
+  //   swalFire();
+  // }
+
+  function swalFire() {
+    Swal.fire({
+      title: "Success",
+      text: "Operation finished correctly",
+      icon: "success",
+    });
   }
 
   return (
     <IndexEntity<userDTO> title="Users" url={`${urlAccounts}/listUsers`}>
-      {(users) => (
+      {(users, buttons) => (
         <>
           <thead>
             <tr>
@@ -64,6 +72,19 @@ export default function IndexUsers() {
                   >
                     Remove Admin
                   </Button>
+                  {/* {buttons(`users/edit/${user.id}`)} */}
+                  {/* <Button
+                    className="btn btn-danger ms-2"
+                    onClick={() =>
+                      customConfirm(
+                        () => deleteUser(user.id),
+                        `Do you wish to delete ${user.email}?`,
+                        `Do it`
+                      )
+                    }
+                  >
+                    Delete
+                  </Button> */}
                 </td>
                 <td>{user.email}</td>
               </tr>

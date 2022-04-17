@@ -20,6 +20,7 @@ import RedirectToLandingPage from "./utils/RedirectToLandingPage";
 import Register from "./auth/Register";
 import Login from "./auth/Login";
 import IndexUsers from "./auth/IndexUsers";
+//import EditUser from "./auth/EditUser";
 
 const routes = [
     {path: '/genres', component: IndexGenres, exact: true, isAdmin: true},
@@ -42,6 +43,7 @@ const routes = [
     {path: '/register', component: Register},
     {path: '/login', component: Login},
     {path: '/users', component: IndexUsers, isAdmin: true},
+    //{path: '/users/edit/:id', component: EditUser},
 
     {path: '/', component: LandingPage, exact: true},
     {path: '*', component: RedirectToLandingPage}

@@ -42,6 +42,7 @@ namespace MoviesAPI.Helpers
                 .ForMember(x => x.Actors, options => options.MapFrom(MapMoviesActors));
 
             CreateMap<IdentityUser, UserDTO>();
+            CreateMap<Review, ReviewDTO>();
         }
 
         private List<GenreDTO> MapMoviesGenres(Movie movie, MovieDTO movieDTO)
