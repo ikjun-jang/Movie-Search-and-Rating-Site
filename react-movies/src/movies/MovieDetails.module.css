@@ -1,16 +1,16 @@
-.p {
-    padding: 8px;
-    margin: 25px;
-    
-    /* other styling */
-    background-color: #33475b;
-    border-radius: 10px;
-    color: white;
-    font-family: Avenir;
-  }
+.div {
+  padding: 8px;
+  margin: 25px;
 
-.button { 
+  /* other styling */
+  background-color: #33475b;
+  border-radius: 10px;
+  color: white;
+  font-family: Avenir;
+}
+
+.alignRight {
   display: flex;
-  justify-content: right; 
+  justify-content: right;
   margin-right: 2em;
 }

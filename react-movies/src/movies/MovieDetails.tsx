@@ -4,9 +4,12 @@ import ReactMarkdown from "react-markdown";
 import { Link, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import AuthenticationContext from "../auth/AuthenticationContext";
+import Authorized from "../auth/Authorized";
 import { urlMovies, urlRatings, urlReviews } from "../endpoints";
+import AlertContext from "../utils/AlertContext";
 import Button from "../utils/Button";
 import coordinateDTO from "../utils/coordinates.models";
+import customConfirm from "../utils/customConfirm";
 import DisplayErrors from "../utils/DisplayErrors";
 import Loading from "../utils/Loading";
 import Map from "../utils/Map";
@@ -20,6 +23,7 @@ export default function MovieDetails() {
   const [reviewText, setReviewText] = useState<string>("");
   const [errors, setErrors] = useState<string[]>([]);
   const { claims } = useContext(AuthenticationContext);
+  const customAlert = useContext(AlertContext);
 
   useEffect(() => {
     axios
@@ -85,6 +89,12 @@ export default function MovieDetails() {
         setErrors(errors.response.data);
       }
     }
+  }
+
+  function deleteReview(id: number) {
+    axios.delete(`${urlReviews}/${id}`).then(() => {
+      customAlert();
+    });
   }
 
   return movie ? (
@@ -185,7 +195,7 @@ export default function MovieDetails() {
           value={reviewText}
           onChange={(event) => setReviewText(event.target.value)}
         />
-        <div className={css.button}>
+        <div className={css.alignRight}>
           <Button onClick={() => postReview()}>Post</Button>
         </div>
       </div>
@@ -193,10 +203,27 @@ export default function MovieDetails() {
         <div>
           <h3>Reviews</h3>
           {movie.reviews?.map((review) => (
-            <div key={review.id} className={css.p}>
-              {review.userEmail} | {review.postingDate.toDateString()}
-              <hr />
-              <ReactMarkdown>{review.reviewText}</ReactMarkdown>
+            <div key={review.id} >
+              <div className={css.div}>
+                {review.userEmail} | {review.postingDate.toDateString()}
+                <hr />
+                <ReactMarkdown>{review.reviewText}</ReactMarkdown>
+              </div>
+              <Authorized
+                role="admin"
+                authorized={
+                  <div className={css.alignRight}>
+                    <Button
+                      onClick={() =>
+                        customConfirm(() => deleteReview(review.id))
+                      }
+                      className={"btn btn-danger"}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                }
+              />
             </div>
           ))}
         </div>
