@@ -20,7 +20,7 @@ npm start
 ```
 ### API Server URL
 - `https://moviesapi20220407202553.azurewebsites.net`
-### Web Server URL
+### Web Site URL
 - `https://reactmovies3469.web.app`
 
 ## Endpoints
